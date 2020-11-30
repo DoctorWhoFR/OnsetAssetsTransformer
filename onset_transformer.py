@@ -1,25 +1,39 @@
 import re
 import json 
 
-configs_file = open('configs.json', 'r')
-configs = configs_file.read();
-configs_file.close();
+try:
+    configs_file = open('configs.json', 'r')
+    configs = configs_file.read();
+    configs_file.close();
+except:
+    print("The config file is missing !")
+    exit()
 
-# parse x:
-y = json.loads(configs)
+try:
+    # parse x:
+    y = json.loads(configs)
 
-path = y['Path']
+    path = y['Path']
 
-folder_path = y['Folder_path']
+    folder_path = y['Folder_path']
+except:
+    print('Incorrect config file')
+    exit()
 
 
 final_path = path + folder_path
 
 regex = r"[src,href]{3,4}=\"([A-z/ .]{1,})\""
 
-index_file = open('index.html', 'r+')
-index_content = index_file.read()
-index_file.close()
+try:
+    index_file = open('index.html', 'r+')
+    index_content = index_file.read()
+    index_file.close()
+except:
+    print('Invalid index.html file !')
+    exit() 
+
+
 
 matches = re.finditer(regex, index_content, re.MULTILINE)
 
