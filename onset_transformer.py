@@ -1,5 +1,32 @@
 import re
 import json 
+import os
+
+
+def ReplaceContentInFile(replacable):
+    index_file = open("./assets/"+replacable, 'r+')
+    index_content = index_file.read()
+    index_file.close()
+   
+    matches = re.finditer(regex, index_content, re.MULTILINE)
+
+    for matchNum, match in enumerate(matches, start=1):
+        
+        print ("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum = matchNum, start = match.start(), end = match.end(), match = match.group()))
+
+        file_name = final_path + match.group(1)
+
+        index_content = index_content.replace(match.group(1), file_name)
+        print(index_content)
+        print(file_name)
+
+    print('end')
+
+    fin = open("./assets/"+replacable, "wt")
+    fin.write(index_content)
+    fin.close()
+
+
 
 try:
     configs_file = open('configs.json', 'r')
@@ -23,33 +50,11 @@ except:
 
 final_path = path + folder_path
 
-regex = r"[src,href]{3,4}=\"([A-z/ .]{1,})\""
-
-try:
-    index_file = open('index.html', 'r+')
-    index_content = index_file.read()
-    index_file.close()
-except:
-    print('Invalid index.html file !')
-    exit() 
+regex = r"[src,href, background]{3,}[=:] ?[\" url]{1,}\(?([A-z.]{1,})\"?\)?;?"
 
 
-
-matches = re.finditer(regex, index_content, re.MULTILINE)
-
-for matchNum, match in enumerate(matches, start=1):
-    
-    print ("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum = matchNum, start = match.start(), end = match.end(), match = match.group()))
-
-    file_name = final_path + match.group(1)
-
-    index_content = index_content.replace(match.group(1), file_name)
-    print(index_content)
-    print(file_name)
-
-print('end')
-
-fin = open("index.html", "wt")
-fin.write(index_content)
-fin.close()
+arr = os.listdir('./assets')
+print(arr)
+for replacable in arr:
+    ReplaceContentInFile(replacable)
 
