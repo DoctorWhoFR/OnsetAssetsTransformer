@@ -17,9 +17,6 @@ def ReplaceContentInFile(replacable):
         file_name = final_path + match.group(1)
 
         index_content = index_content.replace(match.group(1), file_name)
-        print(index_content)
-        print(file_name)
-
     print('end')
 
     fin = open("./assets/"+replacable, "wt")
