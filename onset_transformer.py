@@ -50,7 +50,7 @@ except:
 
 final_path = path + folder_path
 
-regex = r"[src,href, background]{3,}[=:] ?[\" url]{1,}\(?([A-z.]{1,})\"?\)?;?"
+regex = r"[src,href]{3,4}=\"([A-z/ .]{1,})\""
 
 
 arr = os.listdir('./assets')
