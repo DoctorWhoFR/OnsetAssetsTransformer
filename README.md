@@ -1,5 +1,5 @@
 # OnsetAssetsTransformer
-Just a tool to transform .index and .css file path to onset path
+Just a tool to transform .index file path to onset path
 
 To use this tool you just have to use START.bat this python script use native python module so no installation is needed.
 
